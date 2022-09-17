@@ -1,0 +1,56 @@
+Creation of SSH Keys
+------------------------
+To begin with the installation of jekins in your server. First we need to connect to your server.
+Before that we need to create SSH Key Pair to connect to your servers and maintain the connectivity easier
+To create SSH Key Pair follow the below procedure
+    Open CMD or Powershell
+    Then type the below command
+        ssh-keygen
+    Then it will ask you to enter the path where we need to install the key Pair. By Default it will take the local user path, if you wish to modify the path then place the path where to be installed. Then press enter
+    Now, it will ask you for the Password and Confirmation Password. Just Press Enter if you dont want to maintain password for the your SSH Keys. If you wish to create a password, keep in mind that you need to use the same password every time when you want to login in to or use your SSH Key pairs
+    Then, it will aks you for the Encryption format, just press Enter
+Then key pair will be created in the path which you have specified.
+In Key pairs, there will be 2 things. 
+    1. Private Key - Which is Permanent to the system where it was Generated
+    2. Public Key - This will be used to connect to other servers from your local system. to do that, you need to copy your public key to the other servers.
+
+
+How to Connect to your Server from your Local System:
+------------------------------------------------------
+Go to AWS Console, then navitate to EC2 Dashoboard. 
+Select any instance in which you wish to login.
+Then click on Connect on top.
+Then, form your local system go the path where Pem file exist
+Then, type the following command.
+    ssh -i "Pem-file-name" user@ipaddress
+    Ex: ssh -i "XXXXXXXXXXXXXXX" ubuntu@XXXXXXXXXXXXX.us-west-2.compute.amazonaws.com
+
+
+Install Jenkins on your Server:
+---------------------------------
+Firstly after login into your machine/server you need to update the packages.
+To performa any operation you need to have Root User Permission. To get Root User Permission. Type the belwo command.
+    "sudo su"
+you have to update the packages
+    apt update
+You have install Java on your Server
+    apt-get install apt-get install openjdk-11-jdk -y
+To test if Java was installed or not
+    java --version
+Now to install Jenins follow the below commands.
+    curl -fsSL https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo tee \  /usr/share/keyrings/jenkins-keyring.asc > /dev/null
+    
+    echo deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc] \
+    https://pkg.jenkins.io/debian binary/ | sudo tee \
+    /etc/apt/sources.list.d/jenkins.list > /dev/null
+    
+    sudo apt-get update
+    
+    sudo apt-get install jenkins
+
+Now to access your Jenkins. Go to AWS console and select your jenkins server instace and copy the Public IP-Address and then go to any browser and type the following command
+    public-ipaddress:8080
+Then it will ask for the inital admin password. Now go to your server then type the following command
+    cat /var/lib/jenkins/secrets/initialAdminPassword
+Copy the Password and place it in Jenkins and then continue.
+It will ask you for the plugin installtion go with suggested plugins.
