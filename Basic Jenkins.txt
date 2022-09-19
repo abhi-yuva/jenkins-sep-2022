@@ -1,0 +1,14 @@
+Default Location of Jenkins: /var/lib/jenkins
+Default User in Jenkins: Jenkins
+
+Workspace - /var/lib/jenkins/jobs/Workspace
+
+Jobs - Jobs which ever wer are running in your Jenkins will be displayed here
+    /var/lib/jenkins/jobs/ <Job Details>
+
+
+Different Types of Jobs:
+
+2 Types of Pipelines:
+    1. Scripted Pipelines - Syntactical
+    2. Declarative Pipelines - User Understandable
